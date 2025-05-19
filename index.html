@@ -91,9 +91,16 @@
 </head>
 <body>
   <h1>🌸 花田舍 點單系統</h1>
-  <div id="productList"></div>
 
-  <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
+  <label>營業時間</label>
+    <div style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; background: #f5f5f5;">
+    🐝 下午三點~七點(或售完)
+  </div>
+  
+  <label>營業地點</label>
+    <div style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; background: #f5f5f5;">
+    📍 彰化縣溪湖鎮西環路241號（花田舍小判燒）
+  </div>
 
   <div class="section-title">📅 本月店休日</div>
   <ul style="background:#fff8f0; border:1px solid #ddd; border-radius:8px; padding:1rem; list-style:none;">
@@ -101,6 +108,11 @@
     <li> 2025/05/29（四）</li>
     <li> 2025/05/30（五）</li>
   </ul>
+
+  <div class="section-title">品項</div>
+  <div id="productList"></div>
+
+  <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
 
   <div class="section-title">其他資訊</div>
   <label>稱謂</label>
@@ -249,5 +261,18 @@
       disableHolidayDates();
     };
   </script>
+
+  <script>
+
+    // ✅ 最後面加上這段避免快取的小工具
+    (function () {
+      const url = new URL(window.location.href);
+      if (!url.searchParams.has('v')) {
+        url.searchParams.set('v', Date.now());
+        window.location.replace(url.href);
+      }
+    })();
+  </script>
+
 </body>
 </html>
