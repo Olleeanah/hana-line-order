@@ -209,11 +209,17 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    async function main() {
+      await liff.init({ liffId: "U18fc15f1243c7c43fc7a314b1283ebc8" });
       renderProducts();
       generateTimeSlots();
       disableHolidayDates();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      main();
     });
+
   </script>
 </body>
 </html>
