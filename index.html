@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>花田舍 點單系統</title>
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -81,6 +79,14 @@
       font-size: 1.2rem;
       cursor: pointer;
     }
+    #resultBox {
+      white-space: pre-wrap;
+      background: #fff0f5;
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
   </style>
 </head>
 <body>
@@ -89,7 +95,17 @@
 
   <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
 
+  <div class="section-title">📅 本月店休日</div>
+  <ul style="background:#fff8f0; border:1px solid #ddd; border-radius:8px; padding:1rem; list-style:none;">
+    <li> 2025/05/18（日）</li>
+    <li> 2025/05/29（四）</li>
+    <li> 2025/05/30（五）</li>
+  </ul>
+
   <div class="section-title">其他資訊</div>
+  <label>稱謂</label>
+  <input type="text" id="customerName" placeholder="例如：小花、張小姐" />
+
   <label>電話號碼</label>
   <input type="tel" id="phone" required />
 
@@ -102,9 +118,12 @@
   <label>備註</label>
   <textarea id="note" rows="3" placeholder="例如：蛋全熟、蛋半熟等..."></textarea>
 
-  <button class="submit-btn" onclick="submitOrder()">送出訂單</button>
+  <button class="submit-btn" onclick="generateOrder()">產生訂單文字</button>
 
-  <script defer>
+  <div id="resultBox" style="display:none;"></div>
+  <button class="submit-btn" onclick="copyToClipboard()" style="margin-top:10px; display:none;" id="copyBtn">📋 複製訂單文字</button>
+
+  <script>
     const products = [
       { name: "經典蛋燒", price: 33 },
       { name: "起司蛋燒", price: 40 },
@@ -181,15 +200,26 @@
       });
     }
 
-    async function submitOrder() {
+    
+    function generateOrder() {
+      const name = document.getElementById('customerName').value || "顧客";
       const phone = document.getElementById('phone').value;
       const date = document.getElementById('pickupDate').value;
       const time = document.getElementById('pickupTime').value;
       const note = document.getElementById('note').value;
 
+      let total = 0, count = 0;
+      for (let item of products) {
+        total += state[item.name] * item.price;
+        if (item.name !== '環保提袋') count += state[item.name];
+      }
+
       let orderText = `【花田舍小判燒 預訂單】
+稱謂：${name}
 電話：${phone}
 取餐時間：${date} ${time}
+總金額：$${total}
+總顆數：${count}
 訂購內容：`;
       for (let item of products) {
         if (state[item.name] > 0) {
@@ -200,26 +230,24 @@
       if (note) orderText += `
 備註：${note}`;
 
-      try {
-        await liff.sendMessages([{ type: 'text', text: orderText }]);
-        alert('訂單已送出！請等待店家回覆。');
-        liff.closeWindow();
-      } catch (e) {
-        alert('發送失敗：' + e);
-      }
+      document.getElementById('resultBox').style.display = 'block';
+      document.getElementById('copyBtn').style.display = 'block';
+      document.getElementById('resultBox').innerText = orderText;
     }
 
-    async function main() {
-      await liff.init({ liffId: "U18fc15f1243c7c43fc7a314b1283ebc8" });
+
+    function copyToClipboard() {
+      const result = document.getElementById('resultBox').innerText;
+      navigator.clipboard.writeText(result).then(() => {
+        alert('已複製到剪貼簿，請貼到 LINE 傳送給店家！');
+      });
+    }
+
+    window.onload = () => {
       renderProducts();
       generateTimeSlots();
       disableHolidayDates();
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      main();
-    });
-
+    };
   </script>
 </body>
 </html>
