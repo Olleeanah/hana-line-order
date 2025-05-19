@@ -92,14 +92,14 @@
 <body>
   <h1>🌸 花田舍 點單系統</h1>
 
-  <label>營業時間</label>
+  <div class="section-title">🐝 營業時間</div>
     <div style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; background: #f5f5f5;">
-    🐝 下午三點~七點(或售完)
+    下午3點~7點(或售完)
   </div>
   
-  <label>營業地點</label>
+  <div class="section-title">📍 營業地點</div>
     <div style="padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; background: #f5f5f5;">
-    📍 彰化縣溪湖鎮西環路241號（花田舍小判燒）
+    彰化縣溪湖鎮西環路241號（花田舍小判燒）
   </div>
 
   <div class="section-title">📅 本月店休日</div>
@@ -109,7 +109,12 @@
     <li> 2025/05/30（五）</li>
   </ul>
 
-  <div class="section-title">品項</div>
+  <div class="section-title">⏳ 期間限定口味</div>
+  <div style="padding: 0.5rem 1rem; border: 1px solid #ccc; border-radius: 6px; background: #fffaf0; margin-bottom: 1rem;">
+  敬請期待！
+  </div>
+
+  <div class="section-title">🐣 品項</div>
   <div id="productList"></div>
 
   <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
@@ -263,12 +268,14 @@
   </script>
 
   <script>
-
-    // ✅ 最後面加上這段避免快取的小工具
     (function () {
       const url = new URL(window.location.href);
-      if (!url.searchParams.has('v')) {
+      const today = new Date().toISOString().split('T')[0]; // 只保留年月日
+      const currentVersion = localStorage.getItem('v-date');
+
+      if (currentVersion !== today) {
         url.searchParams.set('v', Date.now());
+        localStorage.setItem('v-date', today);
         window.location.replace(url.href);
       }
     })();
