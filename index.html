@@ -155,7 +155,7 @@
       { name: "環保提袋", price: 2 }
     ];
 
-    const holidays = ['2025-05-18', '2025-05-29', '2025-05-30'];
+    const holidays = ['2025-05-24', '2025-05-29', '2025-05-30'];
     const state = {};
 
     function renderProducts() {
@@ -209,7 +209,7 @@
 
     function disableHolidayDates() {
       const dateInput = document.getElementById('pickupDate');
-      dateInput.addEventListener('input', () => {
+      dateInput.addEventListener('change', () => {
         if (holidays.includes(dateInput.value)) {
           alert('此日為公休日，請選擇其他日期');
           dateInput.value = '';
@@ -272,18 +272,19 @@
   </script>
 
   <script>
+    // ✅ 每次開啟都加上版本參數，避免快取
     (function () {
       const url = new URL(window.location.href);
-      const today = new Date().toISOString().split('T')[0]; // 只保留年月日
-      const currentVersion = localStorage.getItem('v-date');
+      const timestamp = Date.now().toString();
 
-      if (currentVersion !== today) {
-        url.searchParams.set('v', Date.now());
-        localStorage.setItem('v-date', today);
+      // 如果網址還沒加 v 參數就加
+      if (!url.searchParams.has('v')) {
+        url.searchParams.set('v', timestamp);
         window.location.replace(url.href);
       }
     })();
   </script>
+
 
 </body>
 </html>
