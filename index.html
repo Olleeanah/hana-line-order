@@ -141,7 +141,7 @@
 
   <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
 
-  <div class="section-title">其他資訊</div>
+  <div class="section-title">✍️ 其他資訊</div>
   <label>稱謂</label>
   <input type="text" id="customerName" placeholder="例如：小花、張小姐" />
 
@@ -154,13 +154,24 @@
   <label>取餐時間</label>
   <select id="pickupTime"></select>
 
-  <label>備註</label>
+  <!-- 備註區 -->
+  <label for="note">備註</label>
   <textarea id="note" rows="3" placeholder="例如：蛋全熟、蛋半熟等..."></textarea>
 
-  <button class="submit-btn" onclick="generateOrder()">產生訂單文字~請往下拉</button>
+  <!-- 操作提示與按鈕區 -->
+  <div style="margin-top: 1rem; color:#666; font-size: 0.9rem;">
+    ⬇️ 點擊下方按鈕產生訂單，再複製文字貼給我們 ☺️
+  </div>
 
-  <div id="resultBox" style="display:none;"></div>
+  <!-- 產生訂單 -->
+  <button class="submit-btn" onclick="generateOrder()">🧾 產生訂單文字</button>
+
+  <!-- 顯示訂單文字 -->
+  <div id="resultBox" style="display:none; margin-top: 1rem;"></div>
+
+  <!-- 複製按鈕 -->
   <button class="submit-btn" onclick="copyToClipboard()" style="margin-top:10px; display:none;" id="copyBtn">📋 複製訂單文字</button>
+
 
   <script>
     const products = [
