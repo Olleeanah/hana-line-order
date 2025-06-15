@@ -379,15 +379,28 @@
       timeSelect.innerHTML = '';
       const val = dateInput.value;
       if (!val || holidays.has(val)) return;
+
       const d = new Date(val);
       const day = d.getDay();
-      const startHour = (day === 0 || day === 6) ? 14 : 15;
-      const startMin = (day === 0 || day === 6) ? 40 : 10;
-      for (let h = startHour; h < 19; h++) {
+      const isToday = val === new Date().toISOString().split('T')[0];
+
+      const baseHour = (day === 0 || day === 6) ? 14 : 15;
+      const baseMin = (day === 0 || day === 6) ? 40 : 10;
+
+      let nowHour = 0, nowMin = 0;
+      if (isToday) {
+        const now = new Date();
+        nowHour = now.getHours();
+        nowMin = now.getMinutes();
+      }
+
+      for (let h = baseHour; h < 19; h++) {
         for (let m = 0; m < 60; m += 10) {
-          if (h === startHour && m < startMin) continue;
-          const hh = String(h).padStart(2,'0');
-          const mm = String(m).padStart(2,'0');
+          if (h === baseHour && m < baseMin) continue;
+          if (isToday && (h < nowHour || (h === nowHour && m <= nowMin))) continue;
+
+          const hh = String(h).padStart(2, '0');
+          const mm = String(m).padStart(2, '0');
           const opt = document.createElement('option');
           opt.value = `${hh}:${mm}`;
           opt.textContent = `${hh}:${mm}`;
@@ -395,6 +408,7 @@
         }
       }
     }
+
 
     function validateForm({ total, count }) {
       if (count === 0) {
