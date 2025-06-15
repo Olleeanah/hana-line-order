@@ -34,13 +34,37 @@
       font-size: 2rem;
       color: var(--color-primary);
     }
+
     .section-title {
-      font-weight: bold;
-      margin-top: 1.5rem;
-      border-bottom: 1px solid #d7cfc7;
-      padding-bottom: 0.25rem;
-      color: var(--color-secondary);
+      font-size: 1.3rem;        /* 字體大小 */
+      font-weight: 500;         /* 原本 600 改成 500 較柔和 */
+      margin-top: 1.2rem;
+      padding: 0.4rem 0;
+      background: #fdf1e9;
+      color: #3e2d2f;
+      border-bottom: 1.2px solid #f0d8c0;
+      border-radius: 6px;
     }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #5c4033;
+      background: #fffdf9;
+      padding: 0.4rem 0.6rem;
+      margin-top: 0.8rem;
+      margin-bottom: 0.5rem;
+      border-left: 4px solid #f0cda6;
+      border-radius: 6px;
+    }
+
+
+
+    .product-group {
+      margin-bottom: 1.2rem;
+    }
+
+
     .section-instruction {
       text-align: center;
       color: var(--color-secondary);
@@ -55,14 +79,16 @@
       margin-top: 0.5rem;
       line-height: 1.6;
     }
+
     .card-accent {
-      background: var(--bg-accent);
-      border: 1px solid #dfcbd2;
-      color: #444;
+      background: #fef1f3;
+      border: 1px solid #f5c3cc;
+      color: #5c4033;
     }
+
     .card-info {
-        background: #fff1d6;
-        border: 1px solid #e8be8c;
+        background: #fff5e9;
+        border: 1px solid #f0d8c0;
         color: #5c4033;
     }
 
@@ -247,21 +273,26 @@
   <script>
   (function() {
     const products = [
-      { name: "經典蛋燒", price: 33 },
-      { name: "起司蛋燒", price: 40 },
-      { name: "雙重起司", price: 30 },
-      { name: "濃郁卡士達", price: 25 },
-      { name: "法式奶酥", price: 35 },
-      { name: "起司奶酥", price: 35 },
-      { name: "黑糖麻糬", price: 33 },
-      { name: "日式紅豆泥", price: 30 },
-      { name: "日式紅豆麻糬", price: 35 },
-      { name: "古早味雞蛋糕", price: 18 },
-      { name: "濃情巧克力", price: 38 },
-      { name: "義美草莓果粒", price: 35 },
-      { name: "煉乳草莓果粒", price: 38 },
-      { name: "環保提袋", price: 2 }
+      { name: "經典蛋燒", price: 33, category: "鹹口味" },
+      { name: "起司蛋燒", price: 40, category: "鹹口味" },
+      { name: "雙重起司", price: 30, category: "鹹口味" },
+
+      { name: "濃郁卡士達", price: 25, category: "甜口味" },
+      { name: "法式奶酥", price: 35, category: "甜口味" },
+      { name: "起司奶酥", price: 35, category: "甜口味" },
+      { name: "黑糖麻糬", price: 33, category: "甜口味" },
+      { name: "日式紅豆泥", price: 30, category: "甜口味" },
+      { name: "日式紅豆麻糬", price: 35, category: "甜口味" },
+
+      { name: "古早味雞蛋糕", price: 18, category: "原味" },
+
+      { name: "濃情巧克力", price: 38, category: "限定口味" },
+      { name: "義美草莓果粒", price: 35, category: "限定口味" },
+      { name: "煉乳草莓果粒", price: 38, category: "限定口味" },
+
+      { name: "環保提袋", price: 2, category: "其他" }
     ];
+
     const holidays = new Set(['2025-06-04','2025-06-10','2025-06-13','2025-06-17','2025-06-27']);
     const state = {};
 
@@ -275,22 +306,53 @@
 
     function renderProducts() {
       const frag = document.createDocumentFragment();
-      products.forEach((item, idx) => {
-        state[item.name] = 0;
-        const div = document.createElement('div');
-        div.className = 'product';
-        div.innerHTML = `
-          <div class="name">${item.name} - $${item.price}</div>
-          <div class="counter" data-index="${idx}">
-            <button class="minus-btn" disabled>-</button>
-            <span id="qty-${idx}">0</span>
-            <button class="plus-btn">+</button>
-          </div>
-        `;
-        frag.appendChild(div);
+
+      const emojis = {
+        "鹹口味": "🧂",
+        "甜口味": "🍰",
+        "原味": "🥚",
+        "限定口味": "⏳",
+        "其他": "🌱"
+      };
+
+      const categories = ["鹹口味", "甜口味", "原味", "限定口味", "其他"];
+
+      categories.forEach(cat => {
+        const filtered = products
+          .map((item, idx) => ({ item, idx }))
+          .filter(({ item }) => item.category === cat);
+
+        if (filtered.length === 0) return; // ✅ 沒有該分類商品就跳過
+
+        const group = document.createElement('div');
+        group.className = 'product-group';
+
+        const subtitle = document.createElement('div');
+        subtitle.className = 'section-subtitle';
+        subtitle.textContent = `${emojis[cat] || "🍽️"} ${cat}`;
+        group.appendChild(subtitle);
+
+        filtered.forEach(({ item, idx }) => {
+          state[item.name] = 0;
+          const div = document.createElement('div');
+          div.className = 'product';
+          div.innerHTML = `
+            <div class="name">${item.name} - $${item.price}</div>
+            <div class="counter" data-index="${idx}">
+              <button class="minus-btn" disabled>-</button>
+              <span id="qty-${idx}">0</span>
+              <button class="plus-btn">+</button>
+            </div>
+          `;
+          group.appendChild(div);
+        });
+
+        frag.appendChild(group);
+
       });
       productListEl.appendChild(frag);
     }
+
 
     function updateSummary() {
       let total = 0, count = 0;
