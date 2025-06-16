@@ -225,7 +225,6 @@
 
   <div class="section-title">📅 本月店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
-    <li>2025/06/10（二）</li>
     <li>2025/06/17（二）</li>
     <li>2025/06/27（五）</li>
   </ul>
@@ -235,11 +234,10 @@
 
   <div class="section-title">⏳ 期間限定口味</div>
   <div class="card card-accent">
-    🍫 <strong>草莓可可日限定</strong><br>
-    ▸ 濃情巧克力 $38<br>
-    ▸ 義美草莓果粒 $35<br>
-    ▸ 煉乳草莓果粒 $38<br>
-    今天的空氣甜甜的，來一份「莓好小點心」，剛剛好 🍓
+    ▸ 濃情巧克力（僅剩少量）$38<br>
+    ▸ 蜂蜜雞蛋糕 $28<br>
+    ▸ 蜂蜜卡士達 $30<br>
+    今日甜香蜜意，蜂蜜系列上架囉！🍯✨
   </div>
 
   <div class="section-title">🐣 品項</div>
@@ -287,8 +285,8 @@
       { name: "古早味雞蛋糕", price: 18, category: "原味" },
 
       { name: "濃情巧克力", price: 38, category: "限定口味" },
-      { name: "義美草莓果粒", price: 35, category: "限定口味" },
-      { name: "煉乳草莓果粒", price: 38, category: "限定口味" },
+      { name: "蜂蜜雞蛋糕", price: 28, category: "限定口味" },
+      { name: "蜂蜜卡士達", price: 30, category: "限定口味" },
 
       { name: "環保提袋", price: 2, category: "其他" }
     ];
@@ -345,7 +343,15 @@
             </div>
           `;
           group.appendChild(div);
+
+          if (item.name === "環保提袋") {
+            const tip = document.createElement('div');
+            tip.style.cssText = "font-size: 0.9rem; color: #6a4f3b; margin: 0.3rem 0 0.8rem 0.5rem;";
+            tip.textContent = " 愛護地球，歡迎自備購物袋 ♻️";
+            group.appendChild(tip);
+          }
         });
+
 
         frag.appendChild(group);
 
