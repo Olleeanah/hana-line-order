@@ -238,12 +238,15 @@
     🌼【鮮檸檬奶酥】$38<br>
 
     小清新口味來囉～<br>
-    這次特別用了新鮮檸檬皮和果汁調製奶酥餡，咬下去是微酸微甜的檸檬香，
+    這次特別用了新鮮檸檬皮和果汁調製奶酥餡，咬下去是清新的檸檬香氣，
     搭配鬆軟蛋糕體，超適合夏天！💛<br><br>
 
     🍫 大人氣口味也沒缺席唷！<br>
     【濃情巧克力】$38<br>
     使用特調的苦甜巧克力醬，濃郁不膩口~✨<br><br>
+
+    ※ 黑糖麻糬暫未供應，預計 1～2 日內補貨 ✨<br>
+    若有預訂需求，歡迎先詢問確認~ ♡<br><br>
 
     今天有提早營業唷（14:30 開始），大家可以早點來點起來 (๑•̀ㅂ•́)و✧
   </div>
@@ -299,6 +302,12 @@
       { name: "環保提袋", price: 2, category: "其他" }
     ];
 
+    const disabledProducts = {
+      '黑糖麻糬': '預計明天或後天補貨，敬請期待 ♡',
+      // '臨時售完的品項'
+    };
+
+
     const holidays = new Set(['2025-06-04','2025-06-10','2025-06-13','2025-06-17','2025-06-27']);
     const state = {};
 
@@ -342,14 +351,19 @@
           state[item.name] = 0;
           const div = document.createElement('div');
           div.className = 'product';
+
+          const isDisabled = item.name in disabledProducts;
+
           div.innerHTML = `
             <div class="name">${item.name} - $${item.price}</div>
+            ${isDisabled ? `<div style="font-size: 0.85rem; color: #a35b5b; margin: 0.3rem 0 0.2rem;">※ ${disabledProducts[item.name]}</div>` : ''}
             <div class="counter" data-index="${idx}">
               <button class="minus-btn" disabled>-</button>
               <span id="qty-${idx}">0</span>
-              <button class="plus-btn">+</button>
+              <button class="plus-btn" ${isDisabled ? 'disabled' : ''}>+</button>
             </div>
           `;
+
           group.appendChild(div);
 
           if (item.name === "環保提袋") {
@@ -359,6 +373,7 @@
             group.appendChild(tip);
           }
         });
+
 
 
         frag.appendChild(group);
