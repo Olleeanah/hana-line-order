@@ -234,8 +234,18 @@
 
   <div class="section-title">⏳ 期間限定口味</div>
   <div class="card card-accent">
-    巧克力系列今天(6/24)已完售 🍫<br>
-    明天(6/25)會再出爐～歡迎提前預訂唷！(｡•ㅅ•｡)♡
+    🍋✨全新限定口味・初登場✨🍋<br>
+    🌼【鮮檸檬奶酥】$38<br>
+
+    小清新口味來囉～<br>
+    這次特別用了新鮮檸檬皮和果汁調製奶酥餡，咬下去是微酸微甜的檸檬香，
+    搭配鬆軟蛋糕體，超適合夏天！💛<br><br>
+
+    🍫 大人氣口味也沒缺席唷！<br>
+    【濃情巧克力】$38<br>
+    使用特調的苦甜巧克力醬，濃郁不膩口~✨<br><br>
+
+    今天有提早營業唷（14:30 開始），大家可以早點來點起來 (๑•̀ㅂ•́)و✧
   </div>
 
 
@@ -283,6 +293,8 @@
 
       { name: "古早味雞蛋糕", price: 18, category: "原味" },
 
+      { name: "鮮檸檬奶酥", price: 38, category: "限定口味" },
+      { name: "濃情巧克力", price: 38, category: "限定口味" },
 
       { name: "環保提袋", price: 2, category: "其他" }
     ];
@@ -386,8 +398,14 @@
       const day = d.getDay();
       const isToday = val === new Date().toISOString().split('T')[0];
 
-      const baseHour = (day === 0 || day === 6) ? 14 : 15;
-      const baseMin = (day === 0 || day === 6) ? 40 : 10;
+      const earlyOpenDays = new Set(['2025-06-25']); // ⬅️ 想提早營業哪天就在這加
+      const isEarlyOpenDay = earlyOpenDays.has(val);
+      const isWeekend = (day === 0 || day === 6);
+      const useWeekendTime = isWeekend || isEarlyOpenDay;
+
+      const baseHour = useWeekendTime ? 14 : 15;
+      const baseMin = useWeekendTime ? 40 : 10;
+
 
       let nowHour = 0, nowMin = 0;
       if (isToday) {
