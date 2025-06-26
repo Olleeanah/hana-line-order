@@ -18,9 +18,7 @@
       --btn-text: #fff;
       --btn-hover: linear-gradient(to right, #f4b6c6, #fbd0dc);
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
       font-family: "Segoe UI", sans-serif;
       background: var(--bg-page);
@@ -28,180 +26,27 @@
       max-width: 600px;
       margin: auto;
     }
-    h1 {
-      text-align: center;
-      margin: 0.5rem 0;
-      font-size: 2rem;
-      color: var(--color-primary);
-    }
-
-    .section-title {
-      font-size: 1.3rem;        /* 字體大小 */
-      font-weight: 500;         /* 原本 600 改成 500 較柔和 */
-      margin-top: 1.2rem;
-      padding: 0.4rem 0;
-      background: #fdf1e9;
-      color: #3e2d2f;
-      border-bottom: 1.2px solid #f0d8c0;
-      border-radius: 6px;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: #5c4033;
-      background: #fffdf9;
-      padding: 0.4rem 0.6rem;
-      margin-top: 0.8rem;
-      margin-bottom: 0.5rem;
-      border-left: 4px solid #f0cda6;
-      border-radius: 6px;
-    }
-
-
-
-    .product-group {
-      margin-bottom: 1.2rem;
-    }
-
-
-    .section-instruction {
-      text-align: center;
-      color: var(--color-secondary);
-      margin: 1rem 0;
-      font-size: 1rem;
-    }
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-top: 0.5rem;
-      line-height: 1.6;
-    }
-
-    .card-accent {
-      background: #fef1f3;
-      border: 1px solid #f5c3cc;
-      color: #5c4033;
-    }
-
-    .card-info {
-        background: #fff5e9;
-        border: 1px solid #f0d8c0;
-        color: #5c4033;
-    }
-
-    #productList {
-      margin-top: 0.5rem;
-    }
-    .product {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid var(--color-border);
-      padding: 0.5rem;
-      margin-bottom: 0.5rem;
-      border-radius: 8px;
-      background-color: #fff;
-    }
-    .product .name {
-      flex: 1;
-      color: var(--color-primary);
-    }
-    .counter {
-      display: flex;
-      align-items: center;
-    }
-    .counter button {
-      width: 32px;
-      height: 32px;
-      border: none;
-      background: var(--btn-bg);
-      color: var(--btn-text);
-      font-size: 1.2rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .counter button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .counter span {
-      display: inline-block;
-      width: 32px;
-      text-align: center;
-      margin: 0 0.5rem;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--color-border-light);
-      border-radius: 6px;
-      font-size: 1rem;
-      background: #fffefc;
-      color: var(--color-primary);
-    }
-    .summary {
-      margin-top: 1rem;
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: var(--color-text);
-      text-align: right;
-    }
-    .submit-btn {
-        background: var(--btn-bg);
-        color: var(--btn-text);
-        font-weight: bold;
-        padding: 1.2rem;
-        width: 100%;
-        border: none;
-        border-radius: 12px;
-        font-size: 1.4rem;
-        cursor: pointer;
-        margin-top: 1.5rem;
-        box-shadow: 0 4px 10px rgba(213, 140, 163, 0.4);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        animation: pulse 1.6s infinite;
-    }
-
-    .submit-btn:hover {
-        transform: scale(1.03);
-        box-shadow: 0 6px 14px rgba(213, 140, 163, 0.6);
-    }
-
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 rgba(213, 140, 163, 0.4); }
-        70% { box-shadow: 0 0 15px rgba(213, 140, 163, 0.8); }
-        100% { box-shadow: 0 0 0 rgba(213, 140, 163, 0.4); }
-    }
-
-    #resultBox {
-      white-space: pre-wrap;
-      background: var(--bg-accent);
-      border: 1px solid #dfcbd2;
-      padding: 1rem;
-      border-radius: 6px;
-      color: var(--color-text);
-      margin-top: 1rem;
-      display: none;
-    }
-    #copyBtn {
-      display: none;
-    }
-    /* LOGO 容器 */
-    .logo-container {
-      text-align: center;
-      margin: 1.5rem 0 1rem;
-    }
-    .logo-container img {
-      max-width: 160px;
-      height: auto;
-      display: block;
-      margin: 0 auto 0.3rem;
-    }
+    h1 { text-align: center; margin: 0.5rem 0; font-size: 2rem; color: var(--color-primary); }
+    .section-title { font-size: 1.3rem; font-weight: 500; margin-top: 1.2rem; padding: 0.4rem 0; background: #fdf1e9; color: #3e2d2f; border-bottom: 1.2px solid #f0d8c0; border-radius: 6px; }
+    .section-subtitle { font-size: 1.1rem; font-weight: 500; color: #5c4033; background: #fffdf9; padding: 0.4rem 0.6rem; margin-top: 0.8rem; margin-bottom: 0.5rem; border-left: 4px solid #f0cda6; border-radius: 6px; }
+    .product-group { margin-bottom: 1.2rem; }
+    .card { background: var(--bg-card); border: 1px solid var(--color-border); border-radius: 8px; padding: 1rem; margin-top: 0.5rem; line-height: 1.6; }
+    .card-accent { background: #fef1f3; border: 1px solid #f5c3cc; color: #5c4033; }
+    .card-info { background: #fff5e9; border: 1px solid #f0d8c0; color: #5c4033; }
+    #productList { margin-top: 0.5rem; }
+    .product { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--color-border); padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 8px; background-color: #fff; }
+    .product .name { flex: 1; color: var(--color-primary); }
+    .counter { display: flex; align-items: center; }
+    .counter button { width: 32px; height: 32px; border: none; background: var(--btn-bg); color: var(--btn-text); font-size: 1.2rem; border-radius: 4px; cursor: pointer; }
+    .counter button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .counter span { display: inline-block; width: 32px; text-align: center; margin: 0 0.5rem; }
+    input, select, textarea { width: 100%; padding: 0.5rem; margin-top: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--color-border-light); border-radius: 6px; font-size: 1rem; background: #fffefc; color: var(--color-primary); }
+    .summary { margin-top: 1rem; font-size: 1.1rem; font-weight: bold; color: var(--color-text); text-align: right; }
+    .submit-btn { background: var(--btn-bg); color: var(--btn-text); font-weight: bold; padding: 1.2rem; width: 100%; border: none; border-radius: 12px; font-size: 1.4rem; cursor: pointer; margin-top: 1.5rem; box-shadow: 0 4px 10px rgba(213, 140, 163, 0.4); transition: transform 0.2s ease, box-shadow 0.2s ease; animation: pulse 1.6s infinite; }
+    .submit-btn:hover { transform: scale(1.03); box-shadow: 0 6px 14px rgba(213, 140, 163, 0.6); }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 rgba(213, 140, 163, 0.4); } 70% { box-shadow: 0 0 15px rgba(213, 140, 163, 0.8);} 100% { box-shadow: 0 0 0 rgba(213, 140, 163, 0.4);} }
+    .logo-container { text-align: center; margin: 1.5rem 0 1rem; }
+    .logo-container img { max-width: 160px; height: auto; display: block; margin: 0 auto 0.3rem; }
   </style>
 </head>
 <body>
@@ -209,7 +54,6 @@
     <img src="logo.png" alt="花田舍 LOGO">
     <h1>點餐系統</h1>
   </div>
-
   <div class="section-title">🐝 營業時間</div>
   <div class="card card-info">
     ▸ <strong>週一至週五：</strong> 下午3點 ~ 晚上7點<br>
@@ -219,10 +63,8 @@
   <div style="font-size:0.95rem; margin-top:0.25rem;">
     ※ <strong>最早可取餐時間：</strong> 平日 15:10、週末 14:40（因需現場烘烤準備 ☕）
   </div>
-
   <div class="section-title">📍 營業地點</div>
   <div class="card card-info">彰化縣溪湖鎮西環路241號</div>
-
   <div class="section-title">📅 本月店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
     <li>2025/06/27（五）</li>
@@ -230,311 +72,112 @@
   <div style="font-size:0.95rem; color:#444; margin-top:0.25rem;">
     ※ 夏季期間，<strong>若遇颱風或天氣不佳</strong>，可能臨時店休 🌀請留意 LINE 或 IG 最新通知 🙏
   </div>
-
   <div class="section-title">⏳ 期間限定口味</div>
   <div class="card card-accent">
     🍋✨全新限定口味・初登場✨🍋<br>
     🌼【鮮檸檬奶酥】$38<br>
-
     小清新口味來囉～<br>
     這次特別用了新鮮檸檬皮和果汁調製奶酥餡，咬下去是清新的檸檬香氣，
     搭配鬆軟蛋糕體，超適合夏天！💛<br><br>
-
     🍫 大人氣口味也沒缺席唷！<br>
     【濃情巧克力】$38<br>
     使用特調的苦甜巧克力醬，濃郁不膩口~✨<br><br>
-
     ※ 黑糖麻糬暫未供應，預計 1～2 日內補貨，若有預訂需求，歡迎先詢問確認~<br><br>
-
   </div>
-
-
   <div class="section-title">🐣 品項</div>
   <div id="productList"></div>
   <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
-
   <div class="section-title">✍️ 其他資訊</div>
   <form id="orderForm" novalidate>
     <label for="customerName">稱謂</label>
     <input type="text" id="customerName" placeholder="例如：小花、張小姐">
-
     <label for="phone">電話號碼</label>
     <input type="tel" id="phone" placeholder="0912345678" pattern="[0-9]{9,10}" required>
-
     <label for="pickupDate">取餐日期</label>
     <input type="date" id="pickupDate" required>
-
     <label for="pickupTime">取餐時間</label>
     <select id="pickupTime" required></select>
-
     <label for="note">備註</label>
     <textarea id="note" rows="3" placeholder="例如：蛋全熟、蛋半熟等..."></textarea>
-
-    <p class="section-instruction">⬇️ 點擊下方按鈕，再複製文字貼給我們 ☺️</p>
-    <button type="button" class="submit-btn" id="generateBtn">🧾 產生訂單文字</button>
+    <button type="button" class="submit-btn" id="generateBtn">🧾 送出訂單</button>
   </form>
-
-  <div id="resultBox"></div>
-  <button class="submit-btn" id="copyBtn">📋 複製訂單文字</button>
-
   <script>
   (function() {
     const products = [
       { name: "經典蛋燒", price: 33, category: "鹹口味" },
       { name: "起司蛋燒", price: 40, category: "鹹口味" },
       { name: "雙重起司", price: 30, category: "鹹口味" },
-
       { name: "濃郁卡士達", price: 25, category: "甜口味" },
       { name: "法式奶酥", price: 35, category: "甜口味" },
       { name: "起司奶酥", price: 35, category: "甜口味" },
       { name: "黑糖麻糬", price: 33, category: "甜口味" },
       { name: "日式紅豆泥", price: 30, category: "甜口味" },
       { name: "日式紅豆麻糬", price: 35, category: "甜口味" },
-
       { name: "古早味雞蛋糕", price: 18, category: "原味" },
-
       { name: "鮮檸檬奶酥", price: 38, category: "限定口味" },
       { name: "濃情巧克力", price: 38, category: "限定口味" },
-
       { name: "環保提袋", price: 2, category: "其他" }
     ];
-
-    const disabledProducts = {
-      '黑糖麻糬': '補貨中',
-      // '臨時售完的品項，有貨就刪掉上面那行'
-    };
-
-
+    const disabledProducts = { '黑糖麻糬': '補貨中' };
     const holidays = new Set(['2025-06-04','2025-06-10','2025-06-13','2025-06-17','2025-06-27']);
     const state = {};
-
     const productListEl = document.getElementById('productList');
     const summaryEl = document.getElementById('summary');
     const dateInput = document.getElementById('pickupDate');
     const timeSelect = document.getElementById('pickupTime');
     const generateBtn = document.getElementById('generateBtn');
-    const resultBox = document.getElementById('resultBox');
-    const copyBtn = document.getElementById('copyBtn');
-
     function renderProducts() {
       const frag = document.createDocumentFragment();
-
-      const emojis = {
-        "鹹口味": "🧂",
-        "甜口味": "🍰",
-        "原味": "🥚",
-        "限定口味": "⏳",
-        "其他": "🌱"
-      };
-
+      const emojis = { "鹹口味": "🧂", "甜口味": "🍰", "原味": "🥚", "限定口味": "⏳", "其他": "🌱" };
       const categories = ["鹹口味", "甜口味", "原味", "限定口味", "其他"];
-
       categories.forEach(cat => {
-        const filtered = products
-          .map((item, idx) => ({ item, idx }))
-          .filter(({ item }) => item.category === cat);
-
-        if (filtered.length === 0) return; // ✅ 沒有該分類商品就跳過
-
-        const group = document.createElement('div');
-        group.className = 'product-group';
-
-        const subtitle = document.createElement('div');
-        subtitle.className = 'section-subtitle';
-        subtitle.textContent = `${emojis[cat] || "🍽️"} ${cat}`;
-        group.appendChild(subtitle);
-
+        const filtered = products.map((item, idx) => ({ item, idx })).filter(({ item }) => item.category === cat);
+        if (!filtered.length) return;
+        const group = document.createElement('div'); group.className = 'product-group';
+        const subtitle = document.createElement('div'); subtitle.className = 'section-subtitle'; subtitle.textContent = `${emojis[cat]} ${cat}`; group.appendChild(subtitle);
         filtered.forEach(({ item, idx }) => {
           state[item.name] = 0;
-          const div = document.createElement('div');
-          div.className = 'product';
-
+          const div = document.createElement('div'); div.className = 'product';
           const isDisabled = item.name in disabledProducts;
-
           div.innerHTML = `
             <div class="name">${item.name} - $${item.price}</div>
-            ${isDisabled ? `<div style="font-size: 0.85rem; color: #a35b5b; margin: 0.3rem 0 0.2rem;">※ ${disabledProducts[item.name]}</div>` : ''}
+            ${isDisabled ? `<div style="font-size:0.85rem;color:#a35b5b;margin:0.3rem 0 0.2rem;">※ ${disabledProducts[item.name]}</div>` : ''}
             <div class="counter" data-index="${idx}">
               <button class="minus-btn" disabled>-</button>
               <span id="qty-${idx}">0</span>
               <button class="plus-btn" ${isDisabled ? 'disabled' : ''}>+</button>
             </div>
           `;
-
           group.appendChild(div);
-
           if (item.name === "環保提袋") {
-            const tip = document.createElement('div');
-            tip.style.cssText = "font-size: 0.9rem; color: #6a4f3b; margin: 0.3rem 0 0.8rem 0.5rem;";
+            const tip = document.createElement('div'); tip.style.cssText = "font-size:0.9rem;color:#6a4f3b;margin:0.3rem 0 0.8rem 0.5rem;";
             tip.textContent = " 愛護地球，歡迎自備購物袋 ♻️";
             group.appendChild(tip);
           }
         });
-
-
-
         frag.appendChild(group);
-
       });
       productListEl.appendChild(frag);
     }
-
-
     function updateSummary() {
-      let total = 0, count = 0;
-      products.forEach(item => {
-        const qty = state[item.name] || 0;
-        total += qty * item.price;
-        if (item.name !== '環保提袋') count += qty;
-      });
+      let total=0, count=0;
+      products.forEach(item => { const qty=state[item.name]||0; total+=qty*item.price; if(item.name!=='環保提袋') count+=qty; });
       summaryEl.textContent = `總金額：$${total}｜總顆數：${count}`;
       return { total, count };
     }
-
-    function changeQty(idx, diff) {
-      const item = products[idx];
-      const newQty = Math.max(0, (state[item.name] || 0) + diff);
-      state[item.name] = newQty;
-      document.getElementById(`qty-${idx}`).textContent = newQty;
-      const container = productListEl.querySelector(`.counter[data-index=\"${idx}\"]`);
-      container.querySelector('.minus-btn').disabled = newQty === 0;
-      updateSummary();
-    }
-
+    function changeQty(idx,diff) { const item=products[idx]; const newQty=Math.max(0,(state[item.name]||0)+diff); state[item.name]=newQty; document.getElementById(`qty-${idx}`).textContent=newQty; const container=productListEl.querySelector(`.counter[data-index=\"${idx}\"]`); container.querySelector('.minus-btn').disabled=newQty===0; updateSummary(); }
     function generateTimeSlots() {
       timeSelect.innerHTML = '';
-      const val = dateInput.value;
-      if (!val || holidays.has(val)) return;
-
-      const d = new Date(val);
-      const day = d.getDay();
-      const isToday = val === new Date().toISOString().split('T')[0];
-
-      const earlyOpenDays = new Set(['2025-06-25']); // ⬅️ 想提早營業哪天就在這加
-      const isEarlyOpenDay = earlyOpenDays.has(val);
-      const isWeekend = (day === 0 || day === 6);
-      const useWeekendTime = isWeekend || isEarlyOpenDay;
-
-      const baseHour = useWeekendTime ? 14 : 15;
-      const baseMin = useWeekendTime ? 40 : 10;
-
-
-      let nowHour = 0, nowMin = 0;
-      if (isToday) {
-        const now = new Date();
-        nowHour = now.getHours();
-        nowMin = now.getMinutes();
-      }
-
-      for (let h = baseHour; h < 19; h++) {
-        for (let m = 0; m < 60; m += 10) {
-          if (h === baseHour && m < baseMin) continue;
-          if (isToday && (h < nowHour || (h === nowHour && m <= nowMin))) continue;
-
-          const hh = String(h).padStart(2, '0');
-          const mm = String(m).padStart(2, '0');
-          const opt = document.createElement('option');
-          opt.value = `${hh}:${mm}`;
-          opt.textContent = `${hh}:${mm}`;
-          timeSelect.appendChild(opt);
-        }
-      }
+      const val = dateInput.value; if(!val||holidays.has(val)) return;
+      const d=new Date(val), day=d.getDay(); const isWeekend=(day===0||day===6); const baseHour=isWeekend?14:15; const baseMin=isWeekend?40:10;
+      const today=new Date().toISOString().split('T')[0]; const isToday=val===today; let nowHour=0,nowMin=0;
+      if(isToday){ const now=new Date(); nowHour=now.getHours(); nowMin=now.getMinutes(); }
+      for(let h=baseHour;h<19;h++){ for(let m=0;m<60;m+=10){ if(h===baseHour&&m<baseMin) continue; if(isToday&&(h<nowHour||(h===nowHour&&m<=nowMin))) continue; const hh=String(h).padStart(2,'0'), mm=String(m).padStart(2,'0'); const opt=document.createElement('option'); opt.value=`${hh}:${mm}`; opt.textContent=`${hh}:${mm}`; timeSelect.appendChild(opt);} }
     }
-
-
-    function validateForm({ total, count }) {
-      if (count === 0) {
-        alert('請選擇至少一項品項');
-        return false;
-      }
-      if (!dateInput.value) {
-        alert('請選擇取餐日期'); return false;
-      }
-      if (holidays.has(dateInput.value)) {
-        alert('此日為公休日，請選擇其他日期'); return false;
-      }
-      if (!timeSelect.value) {
-        alert('請選擇取餐時間'); return false;
-      }
-      const phone = document.getElementById('phone');
-      if (!phone.checkValidity()) {
-        alert('請輸入正確電話號碼'); phone.focus(); return false;
-      }
-      return true;
-    }
-
-    function generateOrder() {
-      const { total, count } = updateSummary();
-      if (!validateForm({ total, count })) return;
-      const name = document.getElementById('customerName').value || '顧客';
-      const phone = document.getElementById('phone').value;
-      localStorage.setItem('customerName', name);
-      localStorage.setItem('customerPhone', phone);
-      const date = dateInput.value;
-      const time = timeSelect.value;
-      const note = document.getElementById('note').value;
-      let text = `【花田舍小判燒 預訂單】\n` +
-                 `稱謂：${name}\n電話：${phone}\n取餐時間：${date} ${time}\n` +
-                 `總金額：$${total}\n總顆數：${count}\n訂購內容：`;
-      products.forEach(item => {
-        const qty = state[item.name];
-        if (qty > 0) text += `\n- ${item.name} x${qty}`;
-      });
-      if (note) text += `\n備註：${note}`;
-      text += `\n❗ 有收到店家回覆才代表訂餐成功喔！`;
-      resultBox.textContent = text;
-      resultBox.style.display = 'block';
-      copyBtn.style.display = 'block';
-      resultBox.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function copyToClipboard() {
-      navigator.clipboard.writeText(resultBox.textContent)
-        .then(() => alert('已複製到剪貼簿，請貼到 LINE 傳送！'));
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      renderProducts();
-      updateSummary();
-      // ✅ 加這兩行：從 localStorage 讀取
-        const savedName = localStorage.getItem('customerName');
-        const savedPhone = localStorage.getItem('customerPhone');
-        if (savedName) document.getElementById('customerName').value = savedName;
-        if (savedPhone) document.getElementById('phone').value = savedPhone;
-
-      productListEl.addEventListener('click', e => {
-        const counter = e.target.closest('.counter');
-        if (!counter) return;
-        const idx = Number(counter.dataset.index);
-        if (e.target.classList.contains('plus-btn')) changeQty(idx, 1);
-        if (e.target.classList.contains('minus-btn')) changeQty(idx, -1);
-      });
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.min = today;
-      dateInput.addEventListener('change', () => {
-        if (!dateInput.value) return;
-        if (holidays.has(dateInput.value)) {
-          alert('此日為公休日'); dateInput.value = '';
-          timeSelect.innerHTML = '';
-          return;
-        }
-        generateTimeSlots();
-      });
-      generateBtn.addEventListener('click', generateOrder);
-      copyBtn.addEventListener('click', copyToClipboard);
-    });
+    function validateForm({total,count}){ if(count===0){alert('請選擇至少一項品項');return false;} if(!dateInput.value){alert('請選擇取餐日期');return false;} if(holidays.has(dateInput.value)){alert('此日為公休日，請選擇其他日期');return false;} if(!timeSelect.value){alert('請選擇取餐時間');return false;} const phone=document.getElementById('phone'); if(!phone.checkValidity()){alert('請輸入正確電話號碼'); phone.focus();return false;} return true; }
+    function generateOrder(){ const {total,count}=updateSummary(); if(!validateForm({total,count})) return; const name=document.getElementById('customerName').value||'顧客'; const phone=document.getElementById('phone').value; const date=dateInput.value; const time=timeSelect.value; const note=document.getElementById('note').value; let text=`【花田舍小判燒 預訂單】\n稱謂：${name}\n電話：${phone}\n取餐時間：${date} ${time}\n總金額：$${total}\n總顆數：${count}\n訂購內容：`; products.forEach(item=>{ const qty=state[item.name]; if(qty>0) text+=`\n- ${item.name} x${qty}`; }); if(note) text+=`\n備註：${note}`; text+=`\n❗ 有收到店家回覆才代表訂餐成功喔！`; window.location.href=`https://line.me/R/msg/text/?${encodeURIComponent(text)}`; }
+    document.addEventListener('DOMContentLoaded',()=>{ renderProducts(); updateSummary(); const today=new Date().toISOString().split('T')[0]; dateInput.min=today; productListEl.addEventListener('click',e=>{ const c=e.target.closest('.counter'); if(!c)return; const idx=Number(c.dataset.index); if(e.target.classList.contains('plus-btn')) changeQty(idx,1); if(e.target.classList.contains('minus-btn')) changeQty(idx,-1); }); dateInput.addEventListener('change',()=>{ if(!dateInput.value)return; if(holidays.has(dateInput.value)){ alert('此日為公休日'); dateInput.value=''; timeSelect.innerHTML=''; return;} generateTimeSlots(); }); generateBtn.addEventListener('click',generateOrder);});
   })();
   </script>
-  <script>
-    // 自動附加網址參數，避免快取
-    (function () {
-        const url = new URL(window.location.href);
-        const timestamp = Date.now().toString();
-        if (!url.searchParams.has('v')) {
-        url.searchParams.set('v', timestamp);
-        window.location.replace(url.href);
-        }
-    })();
-</script>
 </body>
 </html>
