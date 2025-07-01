@@ -225,7 +225,10 @@
 
   <div class="section-title">📅 本月店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
-    <li>2025/06/27（五）</li>
+    <li>2025/07/11（五）</li>
+    <li>2025/07/19（六）</li>
+    <li>2025/07/26（六）</li>
+    <li>2025/07/27（日）</li>
   </ul>
   <div style="font-size:0.95rem; color:#444; margin-top:0.25rem;">
     ※ 夏季期間，<strong>若遇颱風或天氣不佳</strong>，可能臨時店休 🌀請留意 LINE 或 IG 最新通知 🙏
@@ -234,14 +237,17 @@
   <div class="section-title">⏳ 期間限定口味</div>
   <div class="card card-accent">
 
-    <p>🍯☕️ <strong>《蜜紅茶雞蛋糕》</strong> NT$30 / 顆<br>
-    內餡選用純龍眼花蜜＋錫蘭紅茶混搭古早味雞蛋糕體，香氣層次豐富，甜而不膩。</p>
+    <p>🎉 <strong>恭迎暑假開跑啦 7/1 ☀️</strong><br>
+  大人小孩都該來點甜點慶祝一下 👏</p>
 
-    <p style="font-style: italic; color: #5c4033;">
-      ✨我們把時光揉進麵糊，只為你 6 月最香的一口幸福。
-    </p>
-    <p>📅 <strong>只在 6/29（日）至 6/30（一）限時販售！</strong><br>
-    每日數量有限，售完為止！ 🍰</p>
+  <p>🍫 <strong>今天有做【濃情巧克力】</strong>！<br>
+  使用苦甜巧克力特調，每一口都是濃郁香氣～<br>
+  苦中帶甜、不膩口，大人小孩都愛的好味道！</p>
+
+  <p>🔸 <strong>濃情巧克力</strong> NT$38 / 顆</p>
+  <p>📣 今日營業提前開烤：<strong>14:30 起</strong><br>
+  趁還沒熱昏頭，來顆療癒的雞蛋糕吧 ♡</p>
+
   </div>
 
 
@@ -289,8 +295,8 @@
 
       { name: "古早味雞蛋糕", price: 18, category: "原味" },
 
-      { name: "蜜紅茶雞蛋糕", price: 30, category: "限定口味" },
-      //{ name: "濃情巧克力", price: 38, category: "限定口味" },
+      //{ name: "蜜紅茶雞蛋糕", price: 30, category: "限定口味" },
+      { name: "濃情巧克力", price: 38, category: "限定口味" },
 
       { name: "環保提袋", price: 2, category: "其他" }
     ];
@@ -301,7 +307,7 @@
     };
 
 
-    const holidays = new Set(['2025-06-04','2025-06-10','2025-06-13','2025-06-17','2025-06-27']);
+    const holidays = new Set(['2025-07-11','2025-07-19','2025-07-26','2025-07-27']);
     const state = {};
 
     const productListEl = document.getElementById('productList');
@@ -406,7 +412,7 @@
       const day = d.getDay();
       const isToday = val === new Date().toISOString().split('T')[0];
 
-      const earlyOpenDays = new Set(['2025-06-25']); // ⬅️ 想提早營業哪天就在這加
+      const earlyOpenDays = new Set(['2025-07-01']); // ⬅️ 想提早營業哪天就在這加
       const isEarlyOpenDay = earlyOpenDays.has(val);
       const isWeekend = (day === 0 || day === 6);
       const useWeekendTime = isWeekend || isEarlyOpenDay;
