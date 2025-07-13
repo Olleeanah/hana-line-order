@@ -203,12 +203,73 @@
       margin: 0 auto 0.3rem;
     }
   </style>
+  <!-- 加入 Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
 </head>
 <body>
   <div class="logo-container">
     <img src="logo.png" alt="花田舍 LOGO">
     <h1>點餐系統</h1>
   </div>
+
+  <!-- 營業狀態面板 -->
+    <div id="storeStatusPanel" class="w-full my-4 p-4 rounded-xl shadow-md text-center text-lg font-bold">
+    <span id="storeStatus" class="text-gray-500 animate-pulse">載入中...</span>
+    </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+      databaseURL: "https://hana-order-default-rtdb.asia-southeast1.firebasedatabase.app/"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const storeStatusEl = document.getElementById("storeStatus");
+    const storeStatusPanel = document.getElementById("storeStatusPanel");
+
+    onValue(ref(db, "status/open"), (snapshot) => {
+    const isOpen = snapshot.val();
+
+    storeStatusEl.textContent = isOpen ? "✅ 花田舍目前營業中" : "🔴 花田舍目前已打烊";
+    storeStatusEl.classList.remove("animate-pulse");
+
+    storeStatusPanel.className =
+  "w-full my-6 p-6 rounded-2xl shadow-xl text-center text-2xl font-extrabold tracking-wide transition-all duration-500 " +
+  (isOpen
+    ? "bg-green-200 text-green-800 border-4 border-green-500 ring ring-green-300"
+    : "bg-red-200 text-red-800 border-4 border-red-500 ring ring-red-300");
+
+    });
+
+    onValue(ref(db, "soldout"), (snapshot) => {
+        const soldoutMap = snapshot.val(); // { "濃郁卡士達": true, "法式奶酥": false, ... }
+
+        document.querySelectorAll(".product").forEach((productDiv) => {
+            const name = productDiv.querySelector(".name").textContent.split(" - ")[0].trim();
+            const plusBtn = productDiv.querySelector(".plus-btn");
+
+            if (soldoutMap && soldoutMap[name] === true) {
+            plusBtn.disabled = true;
+            plusBtn.textContent = "售完";
+            plusBtn.style.background = "#bbb";
+            plusBtn.style.cursor = "not-allowed";
+            productDiv.style.opacity = "0.6";
+            } else {
+            plusBtn.disabled = false;
+            plusBtn.textContent = "+";
+            plusBtn.style.background = ""; // 回復原本按鈕樣式
+            plusBtn.style.cursor = "";
+            productDiv.style.opacity = "1";
+            }
+        });
+    });
+
+  </script>
 
   <div class="section-title">🐝 營業時間</div>
   <div class="card card-info">
@@ -227,7 +288,6 @@
 
   <div class="section-title">📅 本月店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
-    <li>2025/07/11（五）</li>
     <li>2025/07/19（六）</li>
     <li>2025/07/26（六）</li>
     <li>2025/07/27（日）</li>
