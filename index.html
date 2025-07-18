@@ -275,7 +275,7 @@
   <div class="card card-info">
     ▸ <strong>週一至週五：</strong> 下午3點 ~ 晚上7點<br>
     ▸ <strong>週六、週日：</strong> 下午2點30分 ~ 晚上7點<br> 
-    
+    <strong>今天7/18(五)提早至下午2點30分營業~</strong> <br> 
     
     <span style="margin-left: 1.5em; color: #666;">※ 若提早售完會提前收攤唷 🐾</span>
   </div>
@@ -474,7 +474,7 @@
       const day = d.getDay();
       const isToday = val === new Date().toISOString().split('T')[0];
 
-      const earlyOpenDays = new Set(['2025-07-10']); // ⬅️ 想提早營業哪天就在這加
+      const earlyOpenDays = new Set(['2025-07-18']); // ⬅️ 想提早營業哪天就在這加
       const isEarlyOpenDay = earlyOpenDays.has(val);
       const isWeekend = (day === 0 || day === 6);
       const useWeekendTime = isWeekend || isEarlyOpenDay;
