@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>花田舍 點餐系統</title>
+  <title>花田舎 點餐系統</title>
   <style>
     :root {
       --bg-page: #fefaf5;
@@ -235,7 +235,7 @@
     onValue(ref(db, "status/open"), (snapshot) => {
     const isOpen = snapshot.val();
 
-    storeStatusEl.textContent = isOpen ? "✅ 花田舍目前營業中" : "🔴 花田舍目前已打烊";
+    storeStatusEl.textContent = isOpen ? "✅ 花田舎目前營業中" : "🔴 花田舎目前已打烊";
     storeStatusEl.classList.remove("animate-pulse");
 
     storeStatusPanel.className =
@@ -271,6 +271,15 @@
 
   </script>
 
+  <div class="section-title">🌱 我們的堅持</div>
+  <div class="card card-accent">
+    <ul style="padding-left: 1.2rem; list-style: none;">
+      <li>💛 花田舎，就像給家人吃的一樣 <strong>安心</strong></li>
+      <li>✅ 每日現打 <strong>純天然麵糊</strong>，無人工添加、無香精</li>
+      <li>🥚 所有口味皆為 <strong>「蛋奶素」</strong></li>
+    </ul>
+  </div>
+
   <div class="section-title">🐝 營業時間</div>
   <div class="card card-info">
     ▸ <strong>週一至週五：</strong> 下午3點 ~ 晚上7點<br>
@@ -287,7 +296,6 @@
 
   <div class="section-title">📅 本月店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
-    <li>2025/07/26（六）</li>
     <li>2025/07/27（日）</li>
   </ul>
   <div style="font-size:0.95rem; color:#444; margin-top:0.25rem;">
@@ -300,7 +308,6 @@
     <p><strong>敬請期待~！</strong></p>
     
     <ul style="padding-left: 1.2rem; list-style: none;">
-      <li>✅ 所有口味皆為「蛋奶素」</li>
       <li>⚠️ 天氣炎熱，建議提前預訂避免久候 🙌</li>
       <li>🚗 團體訂購可外送，可開收據</li>
     </ul>
@@ -369,7 +376,7 @@
     };
 
 
-    const holidays = new Set(['2025-07-03','2025-07-06','2025-07-09','2025-07-11','2025-07-19','2025-07-26','2025-07-27']);
+    const holidays = new Set(['2025-07-03','2025-07-06','2025-07-09','2025-07-11','2025-07-19','2025-07-27']);
     const state = {};
 
     const productListEl = document.getElementById('productList');
@@ -537,7 +544,7 @@
       const date = dateInput.value;
       const time = timeSelect.value;
       const note = document.getElementById('note').value;
-      let text = `【花田舍小判燒 預訂單】\n` +
+      let text = `【花田舎小判燒 預訂單】\n` +
                  `稱謂：${name}\n電話：${phone}\n取餐時間：${date} ${time}\n` +
                  `總金額：$${total}\n總顆數：${count}\n訂購內容：`;
       products.forEach(item => {
