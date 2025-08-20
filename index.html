@@ -305,14 +305,22 @@
     ※ 夏季期間，<strong>若遇颱風或天氣不佳</strong>，可能臨時店休 🌀請留意 LINE 或 IG 最新通知 🙏
   </div>
 
-  <div class="section-title">⏳ 期間限定口味</div>
+  <div class="section-title">⏳ 期間限定</div>
   <div class="card card-accent">
 
-    <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;"></p>
-    🍵 <strong>鐵觀音奶酥</strong> — $38<br>
-    採用香氣濃郁的鐵觀音茶粉，融合手作奶酥的柔滑香甜，<br>
-    數量有限，趕快來嘗鮮！
-    </p>  
+    
+      <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;">
+        🎉 <strong>花田舎開業一週年🎉</strong><br>
+        為感謝大家的支持，舉辦限時兩日回饋活動 💛<br><br>
+
+        📅 <strong>活動時間：8/20（三）～ 8/21（四）</strong><br><br>
+
+        只要<strong>單筆滿 82 元</strong>，就送<br>
+        👉 <strong>「濃郁卡士達」或「古早味雞蛋糕」</strong>（任選一顆）🎁<br><br>
+
+        ▸ 數量有限，送完為止！<br>
+        
+      </p>
           
     <ul style="padding-left: 1.2rem; list-style: none;">
       <li>⚠️ 建議提前預訂避免久候 🙌</li>
@@ -325,6 +333,19 @@
   <div class="section-title">🐣 品項</div>
   <div id="productList"></div>
   <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
+
+  <div style="background: #fff7f4; border: 1px solid #f1d5cd; padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 1rem;">
+    <label for="freebie" style="font-size: 1.05rem; font-weight: bold; color: #8b4e56;">
+      🎁 感恩活動｜滿 82 元即可自選贈品 💛
+    </label>
+  <select id="freebie" disabled>
+    <option value="">請選擇贈品</option>
+    <option value="濃郁卡士達">濃郁卡士達</option>
+    <option value="古早味雞蛋糕">古早味雞蛋糕</option>
+  </select>
+  <div id="freebieTip" style="font-size:0.9rem; color:#865050; margin-top:-0.8rem; margin-bottom:1rem;">
+    ※ 單筆滿 82 元即可選一顆贈品
+  </div>
 
   <div class="section-title">✍️ 其他資訊</div>
   <form id="orderForm" novalidate>
@@ -366,7 +387,7 @@
 
       { name: "古早味雞蛋糕", price: 18, category: "原味" },
 
-      { name: "鐵觀音奶酥", price: 38, category: "限定口味" },
+      //{ name: "鐵觀音奶酥", price: 38, category: "限定口味" },
       //{ name: "珍珠鐵觀音奶酥", price: 40, category: "限定口味" },
       
       //{ name: "大溪地香草卡士達", price: 30, category: "限定口味" },
@@ -469,6 +490,16 @@
         total += qty * item.price;
         if (item.name !== '環保提袋') count += qty;
       });
+
+      // 贈品邏輯
+      const freebieSelect = document.getElementById('freebie');
+      if (total >= 82) {
+        freebieSelect.disabled = false;
+      } else {
+        freebieSelect.disabled = true;
+        freebieSelect.value = ''; // 自動清空選擇
+      }
+
       summaryEl.textContent = `總金額：$${total}｜總顆數：${count}`;
       return { total, count };
     }
@@ -562,6 +593,13 @@
         const qty = state[item.name];
         if (qty > 0) text += `\n- ${item.name} x${qty}`;
       });
+
+      const freebie = document.getElementById('freebie').value;
+      if (freebie) {
+        text += `\n🎁 贈品：${freebie}`;
+      }
+
+
       if (note) text += `\n備註：${note}`;
       text += `\n❗ 有收到店家回覆才代表訂餐成功喔！`;
       resultBox.textContent = text;
