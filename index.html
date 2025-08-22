@@ -297,7 +297,7 @@
 
   <div class="section-title">📅 店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
-    <li>📌 2025-08-18（一）店休</li>
+    <li>📌 2025-08-22（五）店休</li>
     
   </ul>
 
@@ -310,18 +310,8 @@
 
     
       <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;">
-        🎉 <strong>花田舎開業一週年🎉</strong><br>
-        為感謝大家的支持，舉辦限時兩日回饋活動 💛<br><br>
-
-        📅 <strong>活動時間：8/20（三）～ 8/21（四）</strong><br><br>
-
-        只要<strong>單筆滿 82 元</strong>，就送<br>
-        👉 <strong>「濃郁卡士達」或「古早味雞蛋糕」</strong>（任選一顆）🎁<br>
-        ▸ 數量有限，每人限送一顆，送完為止！<br><br>
+         <strong>敬請期待~🎉</strong><br>
         
-        🍩 <strong>限定加碼：</strong>🌟 <strong>濃情巧克力</strong> $38<br>
-        苦甜濃郁、香氣四溢，巧克力控別錯過！<br><br>
-          </p>
           
     <ul style="padding-left: 1.2rem; list-style: none;">
       <li>⚠️ 建議提前預訂避免久候 🙌</li>
@@ -335,18 +325,7 @@
   <div id="productList"></div>
   <div class="summary" id="summary">總金額：$0｜總顆數：0</div>
 
-  <div style="background: #fff7f4; border: 1px solid #f1d5cd; padding: 0.8rem 1rem; border-radius: 8px; margin-bottom: 1rem;">
-    <label for="freebie" style="font-size: 1.05rem; font-weight: bold; color: #8b4e56;">
-      🎁 感恩活動｜滿 82 元即可自選贈品 💛
-    </label>
-  <select id="freebie" disabled>
-    <option value="">請選擇贈品</option>
-    <option value="濃郁卡士達">濃郁卡士達</option>
-    <option value="古早味雞蛋糕">古早味雞蛋糕</option>
-  </select>
-  <div id="freebieTip" style="font-size:0.9rem; color:#865050; margin-top:-0.8rem; margin-bottom:1rem;">
-    ※ 單筆滿 82 元即可選一顆贈品
-  </div>
+  
 
   <div class="section-title">✍️ 其他資訊</div>
   <form id="orderForm" novalidate>
@@ -388,12 +367,12 @@
 
       { name: "古早味雞蛋糕", price: 18, category: "原味" },
 
-      { name: "鐵觀音奶酥", price: 38, category: "限定口味" },
+      //{ name: "鐵觀音奶酥", price: 38, category: "限定口味" },
       //{ name: "珍珠鐵觀音奶酥", price: 40, category: "限定口味" },
       
       //{ name: "大溪地香草卡士達", price: 30, category: "限定口味" },
       //{ name: "芒果卡士達", price: 33, category: "限定口味" },
-      { name: "濃情巧克力", price: 38, category: "限定口味" },
+      //{ name: "濃情巧克力", price: 38, category: "限定口味" },
       //{ name: "花生巧克力", price: 38, category: "限定口味" },
       //{ name: "香甜玉米起司", price: 35, category: "限定口味" },
       //{ name: "玉米蛋燒", price: 38, category: "限定口味" },
@@ -409,7 +388,7 @@
     };
 
 
-    const holidays = new Set(['2025-07-19','2025-07-29','2025-08-01','2025-08-02','2025-08-18']);
+    const holidays = new Set(['2025-08-22','2025-08-18']);
     const state = {};
 
     const productListEl = document.getElementById('productList');
@@ -492,14 +471,7 @@
         if (item.name !== '環保提袋') count += qty;
       });
 
-      // 贈品邏輯
-      const freebieSelect = document.getElementById('freebie');
-      if (total >= 82) {
-        freebieSelect.disabled = false;
-      } else {
-        freebieSelect.disabled = true;
-        freebieSelect.value = ''; // 自動清空選擇
-      }
+      
 
       summaryEl.textContent = `總金額：$${total}｜總顆數：${count}`;
       return { total, count };
@@ -595,10 +567,6 @@
         if (qty > 0) text += `\n- ${item.name} x${qty}`;
       });
 
-      const freebie = document.getElementById('freebie').value;
-      if (freebie) {
-        text += `\n🎁 贈品：${freebie}`;
-      }
 
 
       if (note) text += `\n備註：${note}`;
