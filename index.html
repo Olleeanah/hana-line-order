@@ -134,6 +134,20 @@
       text-align: center;
       margin: 0 0.5rem;
     }
+
+    .qty-input {
+      width: 60px;
+      text-align: center;
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid var(--color-border-light);
+      border-radius: 6px;
+      background: #fffefc;
+      color: var(--color-primary);
+      margin: 0 0.5rem;
+    }
+
+
     input, select, textarea {
       width: 100%;
       padding: 0.5rem;
@@ -470,9 +484,10 @@
             ${isDisabled ? `<div style="font-size: 0.85rem; color: #a35b5b; margin: 0.3rem 0 0.2rem;">※ ${disabledProducts[item.name]}</div>` : ''}
             <div class="counter" data-index="${idx}">
               <button class="minus-btn" disabled>-</button>
-              <span id="qty-${idx}">0</span>
+              <input type="number" class="qty-input" id="qty-${idx}" value="0" min="0">
               <button class="plus-btn" ${isDisabled ? 'disabled' : ''}>+</button>
             </div>
+
           `;
 
           group.appendChild(div);
@@ -512,11 +527,16 @@
       const item = products[idx];
       const newQty = Math.max(0, (state[item.name] || 0) + diff);
       state[item.name] = newQty;
-      document.getElementById(`qty-${idx}`).textContent = newQty;
-      const container = productListEl.querySelector(`.counter[data-index=\"${idx}\"]`);
+
+      const inputEl = document.getElementById(`qty-${idx}`);
+      inputEl.value = newQty;
+
+      const container = productListEl.querySelector(`.counter[data-index="${idx}"]`);
       container.querySelector('.minus-btn').disabled = newQty === 0;
+
       updateSummary();
     }
+
 
     function generateTimeSlots() {
       timeSelect.innerHTML = '';
@@ -616,7 +636,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderProducts();
       updateSummary();
-      // ✅ 加這兩行：從 localStorage 讀取
+      // ✅ 從 localStorage 讀取
         const savedName = localStorage.getItem('customerName');
         const savedPhone = localStorage.getItem('customerPhone');
         if (savedName) document.getElementById('customerName').value = savedName;
@@ -629,6 +649,28 @@
         if (e.target.classList.contains('plus-btn')) changeQty(idx, 1);
         if (e.target.classList.contains('minus-btn')) changeQty(idx, -1);
       });
+
+      // ✅ ➕ 獨立監聽輸入框變動
+      productListEl.addEventListener('input', e => {
+        if (!e.target.classList.contains('qty-input')) return;
+
+        const idx = Number(e.target.closest('.counter').dataset.index);
+        const item = products[idx];
+        let value = parseInt(e.target.value, 10);
+
+        if (isNaN(value) || value < 0) value = 0;
+
+        state[item.name] = value;
+        e.target.value = value;
+
+        const container = e.target.closest('.counter');
+        const minusBtn = container.querySelector('.minus-btn');
+        minusBtn.disabled = value === 0;
+
+        updateSummary();
+      });
+
+
       const today = new Date().toISOString().split('T')[0];
       dateInput.min = today;
       dateInput.addEventListener('change', () => {
