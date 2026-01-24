@@ -311,7 +311,8 @@
 
   <div class="section-title">📅 店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
-    <li> 1/21(三) 店休 </li>
+    <li>1/29(四)～2/11(三)　店休</li>
+    <li>2/15(日)～2/18(三)　過年休至初二</li>
   
     
   </ul>
@@ -437,7 +438,40 @@
     };
 
 
-    const holidays = new Set(['2026-01-21']);//店休日
+    // ===== 店休日設定（只改這裡就好）=====
+    // 支援：單日 'YYYY-MM-DD'
+    // 支援：區間 ['YYYY-MM-DD', 'YYYY-MM-DD']（含起訖日）
+    function dateRange(start, end) {
+      const result = [];
+      const cur = new Date(start);
+      const last = new Date(end);
+
+      // 用 UTC 避免時區造成日期跳一天
+      cur.setHours(12, 0, 0, 0);
+      last.setHours(12, 0, 0, 0);
+
+      while (cur <= last) {
+        result.push(cur.toISOString().slice(0, 10));
+        cur.setDate(cur.getDate() + 1);
+      }
+      return result;
+    }
+
+    const HOLIDAY_RULES = [
+      // 大阪行：1/29～2/11
+      ['2026-01-29', '2026-02-11'],
+
+      // 過年：2/15～2/18
+      ['2026-02-15', '2026-02-18'],
+
+      // ✅ 「單一天店休」，就加這種：
+      // '2026-02-25',
+    ];
+
+    const holidays = new Set(
+      HOLIDAY_RULES.flatMap(rule => Array.isArray(rule) ? dateRange(rule[0], rule[1]) : [rule])
+    );
+    // ===== 店休日設定結束 =====
     const state = {};
 
     const productListEl = document.getElementById('productList');
