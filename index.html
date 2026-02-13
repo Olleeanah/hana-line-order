@@ -334,7 +334,45 @@
           一口咬下超滿足～✨<br><br>
           
         </p>
+        <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;">
+            <strong style="font-size: 1.3rem;">🧧 新年的掌心溫暖 ‧ 限量分享 </strong><br>
+            <span style="font-style: italic; color: #8b4513;">「每一份手作，都是獨一無二的祝福」</span><br><br>
+            農曆春節，花田舎想把手作的溫度，<br>
+            傳遞給支持我們的朋友們 ❤️<br>
+            🎁 限量加購（總共只有 2 件，售完為止）<br>
+            購買雞蛋糕滿 168 元 <br>
+            加79元即可加購「手作雙層布紅包袋」1 件<br><br>
+            ⭐ 吉祥紅色 x1<br>
+            ⭐ 如意紺藍 x1<br><br>
+            <span style="font-style: italic; color: #703f1c;">也可作為日常收納袋使用喔</span><br><br>
+            
+          </p>
+        <div style="text-align:center; margin-bottom:14px;">
+          <img 
+            src="red-envelope-handmade.jpg"
+            alt="春節手作雙層布紅包袋"
+            id="envelopeImg"
+            style="
+              width:100%;
+              max-width:340px;
+              border-radius:14px;
+              cursor:pointer;
+              box-shadow:0 10px 22px rgba(0,0,0,0.15);
+              transition:transform .25s ease;
+            "
+            onmouseover="this.style.transform='scale(1.03)'"
+            onmouseout="this.style.transform='scale(1)'"
+          >
 
+          <div style="
+              margin-top:8px;
+              font-weight:700;
+              color:#b14b5c;
+              letter-spacing:1px;
+            ">
+            🧧 僅手作 2 件 ·<br>
+          </div>
+        </div>
         
         
       </p>
@@ -427,7 +465,11 @@
       //{ name: "大溪地香草卡士達", price: 30, category: "限定口味" },
       //{ name: "芒果卡士達", price: 33, category: "限定口味" },
 
-      { name: "環保提袋", price: 2, category: "其他" }
+      { name: "環保提袋", price: 2, category: "其他" },
+      
+      { name: "手作雙層布紅包袋 - 吉祥紅色", price: 79, category: "加購*限量1件", isGift: true },
+      { name: "手作雙層布紅包袋 - 如意紺藍",   price: 79, category: "加購*限量1件", isGift: true },
+
     ];
 
     const disabledProducts = {
@@ -488,10 +530,11 @@
         "甜口味": "🍰",
         "原味": "🥚",
         "限定口味": "⏳",
-        "其他": "🌱"
+        "其他": "🌱",
+        "加購*限量1件":"🧧"
       };
 
-      const categories = ["鹹口味", "甜口味", "原味", "限定口味", "其他"];
+      const categories = ["鹹口味", "甜口味", "原味", "限定口味", "其他","加購*限量1件"];
 
       categories.forEach(cat => {
         const filtered = products
@@ -553,12 +596,73 @@
         if (item.name !== '環保提袋') count += qty;
       });
 
-      
+      // --- 春節活動邏輯開始 (不需要時請註解掉下一行) ---
+      checkActivityRules(total, count); 
+      // --- 活動邏輯結束 ---
 
       summaryEl.textContent = `總金額：$${total}｜總顆數：${count}`;
       return { total, count };
     }
 
+    // 春節活動判斷邏輯本體，活動結束刪除
+    function checkActivityRules(total, count) {
+      const giftItems = ["手作雙層布紅包袋 - 吉祥紅色", "手作雙層布紅包袋 - 如意紺藍"];
+      
+      // 1. 計算目前的雞蛋糕總額 (排除加購品與提袋)
+      let cakeTotal = 0;
+      products.forEach(item => {
+        if (!giftItems.includes(item.name) && item.name !== '環保提袋') {
+          cakeTotal += (state[item.name] || 0) * item.price;
+        }
+      });
+
+      const isEligible = cakeTotal >= 168;
+      let currentGiftCount = 0;
+      let needRecompute = false;
+
+      // 2. 先巡檢一次，如果金額不足，強制將所有紅包袋歸零
+      giftItems.forEach(name => {
+        if (!isEligible && state[name] > 0) {
+          state[name] = 0;
+          needRecompute = true; // 有變動數量，標記需要重算金額
+        }
+        currentGiftCount += (state[name] || 0);
+      });
+
+      // 3. 更新按鈕狀態與輸入框數值
+      products.forEach((item, idx) => {
+        if (giftItems.includes(item.name)) {
+          const plusBtn = document.querySelector(`.counter[data-index="${idx}"] .plus-btn`);
+          const qtyInput = document.getElementById(`qty-${idx}`);
+
+          if (qtyInput) qtyInput.value = state[item.name]; // 同步 state 到輸入框
+
+          if (plusBtn) {
+            // 沒滿額，或者已經選了一件，就鎖死 "+" 鈕
+            if (!isEligible || currentGiftCount >= 1) {
+              plusBtn.disabled = true;
+              plusBtn.style.opacity = "0.5";
+            } else {
+              plusBtn.disabled = false;
+              plusBtn.style.opacity = "1";
+            }
+          }
+        }
+      });
+
+      // 4. 如果因為反悔而導致歸零，更新下方的總結文字
+      if (needRecompute) {
+        let newTotal = 0, newCount = 0;
+        products.forEach(item => {
+          const qty = state[item.name] || 0;
+          newTotal += qty * item.price;
+          if (item.name !== '環保提袋') newCount += qty;
+        });
+        summaryEl.textContent = `總金額：$${newTotal}｜總顆數：${newCount}`;
+      }
+    }
+   //春節活動底部，記得活動結束刪除
+    
     function changeQty(idx, diff) {
       const item = products[idx];
       const newQty = Math.max(0, (state[item.name] || 0) + diff);
@@ -696,6 +800,22 @@
 
         if (isNaN(value) || value < 0) value = 0;
 
+        //春節活動加購輸入框，活動結束刪除
+        const giftItems = ["手作雙層布紅包袋 - 吉祥紅色", "手作雙層布紅包袋 - 如意紺藍"];
+        if (giftItems.includes(item.name)) {
+          if (value > 1) value = 1; // 強制不准超過 1
+          
+          // 檢查「雞蛋糕金額」是否達標，沒達標不准輸入
+          let cakeTotal = 0;
+          products.forEach(p => {
+            if (!giftItems.includes(p.name) && p.name !== '環保提袋') {
+              cakeTotal += (state[p.name] || 0) * p.price;
+            }
+          });
+          if (cakeTotal < 168) value = 0;
+        }
+        //春節活動輸入框底部
+
         state[item.name] = value;
         e.target.value = value;
 
@@ -750,5 +870,44 @@
         }
     })();
 </script>
+
+<!-- 圖片放大用 Lightbox -->
+<div id="lightbox" style="
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.85);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+">
+  <img id="lightboxImg" style="
+    max-width:90%;
+    max-height:85%;
+    border-radius:16px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.6);
+  ">
+</div>
+
+<script>
+const envelope = document.getElementById("envelopeImg");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+
+if(envelope){
+  envelope.addEventListener("click", () => {
+    lightbox.style.display = "flex";
+    lightboxImg.src = envelope.src;
+  });
+}
+
+lightbox.addEventListener("click", () => {
+  lightbox.style.display = "none";
+});
+</script>
+
 </body>
 </html>
