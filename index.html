@@ -217,6 +217,8 @@
       display: block;
       margin: 0 auto 0.3rem;
     }
+
+
   </style>
   <!-- 加入 Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
@@ -551,6 +553,15 @@
         subtitle.textContent = `${emojis[cat] || "🍽️"} ${cat}`;
         group.appendChild(subtitle);
 
+        // --- 春節活動紅字開始 ---
+        if (cat.includes("加購")) {
+          const notice = document.createElement('div');
+          notice.style = "color: #d9534f; font-size: 0.85rem; font-weight: bold; margin: 5px 0 10px 40px; display: block;";
+          notice.textContent = "滿$168可加購1件紅包袋";
+          group.appendChild(notice);
+        }
+        // --- 活動紅字結束 ---
+
         filtered.forEach(({ item, idx }) => {
           state[item.name] = 0;
           const div = document.createElement('div');
@@ -607,7 +618,7 @@
     // 春節活動判斷邏輯本體，活動結束刪除
   function checkActivityRules(total, count) {
     const giftItems = ["吉祥紅色", "如意紺藍"];
-    
+      
     // 1. 計算雞蛋糕總額 (排除加購品與提袋)
     let cakeTotal = 0;
     products.forEach(item => {
