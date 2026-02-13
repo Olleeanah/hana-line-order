@@ -1,62 +1,89 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>花田舎 點餐系統</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-page: #fefaf5;
-      --bg-card: #fffaf7;
-      --bg-accent: #fcecef;
-      --color-primary: #3e2d2f;
-      --color-secondary: #6b4f3b;
-      --color-text: #5c4033;
-      --color-border: #e8e2db;
-      --color-border-light: #e0dcd5;
-      --btn-bg: #d58ca3;
+      --bg-page: #f9f6f0;
+      --bg-card: #fffef9;
+      --bg-accent: #fef5e7;
+      --color-primary: #4a3c2e;
+      --color-secondary: #7a6550;
+      --color-text: #5c4f3d;
+      --color-border: #d4c5b0;
+      --color-border-light: #e5dac8;
+      --btn-bg: #c89b7b;
       --btn-text: #fff;
-      --btn-hover: linear-gradient(to right, #f4b6c6, #fbd0dc);
+      --btn-hover: #b88a6a;
     }
     * {
       box-sizing: border-box;
     }
     body {
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Noto Serif TC", "Songti TC", "PingFang TC", serif;
       background: var(--bg-page);
+      background-image: 
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(220, 210, 190, 0.15) 2px, rgba(220, 210, 190, 0.15) 3px),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(220, 210, 190, 0.15) 2px, rgba(220, 210, 190, 0.15) 3px);
       padding: 1rem;
       max-width: 600px;
       margin: auto;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="1" cy="1" r="1" fill="%23d4c5b0" opacity="0.3"/></svg>');
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.4;
     }
     h1 {
       text-align: center;
       margin: 0.5rem 0;
       font-size: 2rem;
       color: var(--color-primary);
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
     }
 
     .section-title {
-      font-size: 1.3rem;        /* 字體大小 */
-      font-weight: 500;         /* 原本 600 改成 500 較柔和 */
+      font-size: 1.3rem;
+      font-weight: 400;
       margin-top: 1.2rem;
-      padding: 0.4rem 0;
-      background: #fdf1e9;
+      padding: 0.6rem 0.8rem;
+      background: linear-gradient(to right, #f5ebe0, #faf6f0);
       color: #3e2d2f;
-      border-bottom: 1.2px solid #f0d8c0;
-      border-radius: 6px;
+      border-left: 4px solid #a88968;
+      border-radius: 2px;
+      box-shadow: 2px 2px 0 rgba(168, 137, 104, 0.15);
+      letter-spacing: 0.08em;
     }
 
     .section-subtitle {
       font-size: 1.1rem;
-      font-weight: 500;
+      font-weight: 400;
       color: #5c4033;
       background: #fffdf9;
-      padding: 0.4rem 0.6rem;
+      padding: 0.5rem 0.8rem;
       margin-top: 0.8rem;
       margin-bottom: 0.5rem;
-      border-left: 4px solid #f0cda6;
-      border-radius: 6px;
+      border-left: 3px solid #d4a574;
+      border-radius: 2px;
+      box-shadow: 1px 1px 0 rgba(212, 165, 116, 0.2);
+      letter-spacing: 0.05em;
     }
 
 
@@ -74,22 +101,35 @@
     }
     .card {
       background: var(--bg-card);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
+      border: 1.5px solid var(--color-border);
+      border-radius: 4px;
       padding: 1rem;
       margin-top: 0.5rem;
-      line-height: 1.6;
+      line-height: 1.8;
+      box-shadow: 3px 3px 0 rgba(180, 160, 130, 0.15);
+      position: relative;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      right: 4px;
+      bottom: 4px;
+      border: 1px solid rgba(212, 197, 176, 0.3);
+      border-radius: 2px;
+      pointer-events: none;
     }
 
     .card-accent {
-      background: #fef1f3;
-      border: 1px solid #f5c3cc;
+      background: #fef9f3;
+      border: 1.5px solid #d4a574;
       color: #5c4033;
     }
 
     .card-info {
-        background: #fff5e9;
-        border: 1px solid #f0d8c0;
+        background: #fffbf5;
+        border: 1.5px solid #c8b299;
         color: #5c4033;
     }
 
@@ -100,15 +140,23 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid var(--color-border);
-      padding: 0.5rem;
+      border: 1.5px solid var(--color-border);
+      padding: 0.6rem;
       margin-bottom: 0.5rem;
-      border-radius: 8px;
-      background-color: #fff;
+      border-radius: 3px;
+      background-color: #fffefb;
+      box-shadow: 2px 2px 0 rgba(180, 160, 130, 0.12);
+      transition: all 0.2s ease;
+    }
+    .product:hover {
+      box-shadow: 3px 3px 0 rgba(168, 137, 104, 0.25);
+      transform: translate(-1px, -1px);
     }
     .product .name {
       flex: 1;
       color: var(--color-primary);
+      font-weight: 400;
+      letter-spacing: 0.03em;
     }
     .counter {
       display: flex;
@@ -117,16 +165,29 @@
     .counter button {
       width: 32px;
       height: 32px;
-      border: none;
+      border: 1.5px solid #a88968;
       background: var(--btn-bg);
       color: var(--btn-text);
       font-size: 1.2rem;
-      border-radius: 4px;
+      border-radius: 2px;
       cursor: pointer;
+      box-shadow: 2px 2px 0 rgba(168, 137, 104, 0.2);
+      transition: all 0.15s ease;
+      font-family: "Noto Sans TC", sans-serif;
+    }
+    .counter button:hover:not(:disabled) {
+      background: var(--btn-hover);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 rgba(168, 137, 104, 0.3);
+    }
+    .counter button:active:not(:disabled) {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 rgba(168, 137, 104, 0.2);
     }
     .counter button:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
+      box-shadow: none;
     }
     .counter span {
       display: inline-block;
@@ -139,69 +200,83 @@
       width: 60px;
       text-align: center;
       font-size: 1rem;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid var(--color-border-light);
-      border-radius: 6px;
-      background: #fffefc;
+      padding: 0.3rem 0.5rem;
+      border: 1.5px solid var(--color-border-light);
+      border-radius: 2px;
+      background: #fffefb;
       color: var(--color-primary);
       margin: 0 0.5rem;
+      font-family: "Noto Sans TC", sans-serif;
+      box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.05);
     }
 
 
     input, select, textarea {
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.6rem;
       margin-top: 0.5rem;
       margin-bottom: 1rem;
-      border: 1px solid var(--color-border-light);
-      border-radius: 6px;
+      border: 1.5px solid var(--color-border-light);
+      border-radius: 3px;
       font-size: 1rem;
-      background: #fffefc;
+      background: #fffefb;
       color: var(--color-primary);
+      font-family: "Noto Sans TC", sans-serif;
+      box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #a88968;
+      box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.08), 0 0 0 2px rgba(168, 137, 104, 0.15);
     }
     .summary {
       margin-top: 1rem;
       font-size: 1.1rem;
-      font-weight: bold;
+      font-weight: 500;
       color: var(--color-text);
       text-align: right;
+      letter-spacing: 0.05em;
     }
     .submit-btn {
         background: var(--btn-bg);
         color: var(--btn-text);
-        font-weight: bold;
+        font-weight: 500;
         padding: 1.2rem;
         width: 100%;
-        border: none;
-        border-radius: 12px;
+        border: 2px solid #a88968;
+        border-radius: 4px;
         font-size: 1.4rem;
         cursor: pointer;
         margin-top: 1.5rem;
-        box-shadow: 0 4px 10px rgba(213, 140, 163, 0.4);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        animation: pulse 1.6s infinite;
+        box-shadow: 4px 4px 0 rgba(168, 137, 104, 0.25);
+        transition: all 0.2s ease;
+        font-family: "Noto Serif TC", serif;
+        letter-spacing: 0.1em;
     }
 
     .submit-btn:hover {
-        transform: scale(1.03);
-        box-shadow: 0 6px 14px rgba(213, 140, 163, 0.6);
+        background: var(--btn-hover);
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0 rgba(168, 137, 104, 0.3);
     }
 
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 rgba(213, 140, 163, 0.4); }
-        70% { box-shadow: 0 0 15px rgba(213, 140, 163, 0.8); }
-        100% { box-shadow: 0 0 0 rgba(213, 140, 163, 0.4); }
+    .submit-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 rgba(168, 137, 104, 0.2);
     }
 
     #resultBox {
       white-space: pre-wrap;
       background: var(--bg-accent);
-      border: 1px solid #dfcbd2;
+      border: 1.5px solid #d4a574;
       padding: 1rem;
-      border-radius: 6px;
+      border-radius: 4px;
       color: var(--color-text);
       margin-top: 1rem;
       display: none;
+      box-shadow: 3px 3px 0 rgba(180, 160, 130, 0.15);
+      font-family: "Noto Sans TC", sans-serif;
+      line-height: 1.8;
     }
     #copyBtn {
       display: none;
@@ -210,16 +285,35 @@
     .logo-container {
       text-align: center;
       margin: 1.5rem 0 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 4px;
+      box-shadow: 2px 2px 0 rgba(180, 160, 130, 0.1);
     }
     .logo-container img {
       max-width: 160px;
       height: auto;
       display: block;
       margin: 0 auto 0.3rem;
+      filter: contrast(0.95) brightness(1.05);
     }
 
+    /* 營業狀態面板手作風格 */
+    #storeStatusPanel {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+      border: 2px solid;
+      font-family: "Noto Sans TC", sans-serif;
+    }
 
   </style>
+  
   <!-- 加入 Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
@@ -329,14 +423,16 @@
     
       <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;">
 
-        <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;">
           <strong>濃情巧克力 $38</strong><br>
           花田舎新鮮特調<br>
           濃郁的苦甜巧克力甘納許<br>
           一口咬下超滿足～✨<br><br>
           
-        </p>
-        <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;">
+          <strong>💜藍莓卡士達 $35</strong><br>
+          花田舎手工熬煮藍莓醬<br>
+          搭配濃郁卡士達<br><br>
+
+
             <strong style="font-size: 1.3rem;">🧧 新年的掌心溫暖 ‧ 限量分享 </strong><br>
             <span style="font-style: italic; color: #8b4513;">「每一份手作，都是獨一無二的祝福」</span><br><br>
             農曆春節，花田舎想把手作的溫度，<br>
@@ -448,7 +544,7 @@
       //{ name: "香甜紫薯", price: 40, category: "限定口味" },
       //{ name: "紫薯Q麻糬", price: 45, category: "限定口味" },
       //{ name: "紫薯起司", price: 45, category: "限定口味" },
-      //{ name: "💜藍莓卡士達", price: 35, category: "限定口味" },
+      { name: "藍莓卡士達", price: 35, category: "限定口味" },
       //{ name: "😈藍莓卡士達 OREO", price: 40, category: "限定口味" },
       //{ name: "草莓奶酥🍓", price: 40, category: "限定口味" },
       //{ name: "鐵觀音卡士達", price: 30, category: "限定口味" },
