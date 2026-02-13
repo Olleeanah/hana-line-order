@@ -597,7 +597,7 @@
       });
 
       // --- 春節活動邏輯開始 (不需要時請註解掉下一行) ---
-      checkActivityRules(total, count); 
+      if (typeof checkActivityRules === 'function') checkActivityRules(total, count);
       // --- 活動邏輯結束 ---
 
       summaryEl.textContent = `總金額：$${total}｜總顆數：${count}`;
@@ -605,65 +605,54 @@
     }
 
     // 春節活動判斷邏輯本體，活動結束刪除
-    function checkActivityRules(total, count) {
-      const giftItems = ["手作雙層布紅包袋 - 吉祥紅色", "手作雙層布紅包袋 - 如意紺藍"];
-      
-      // 1. 計算目前的雞蛋糕總額 (排除加購品與提袋)
-      let cakeTotal = 0;
-      products.forEach(item => {
-        if (!giftItems.includes(item.name) && item.name !== '環保提袋') {
-          cakeTotal += (state[item.name] || 0) * item.price;
-        }
-      });
-
-      const isEligible = cakeTotal >= 168;
-      let currentGiftCount = 0;
-      let needRecompute = false;
-
-      // 2. 先巡檢一次，如果金額不足，強制將所有紅包袋歸零
-      giftItems.forEach(name => {
-        if (!isEligible && state[name] > 0) {
-          state[name] = 0;
-          needRecompute = true; // 有變動數量，標記需要重算金額
-        }
-        currentGiftCount += (state[name] || 0);
-      });
-
-      // 3. 更新按鈕狀態與輸入框數值
-      products.forEach((item, idx) => {
-        if (giftItems.includes(item.name)) {
-          const plusBtn = document.querySelector(`.counter[data-index="${idx}"] .plus-btn`);
-          const qtyInput = document.getElementById(`qty-${idx}`);
-
-          if (qtyInput) qtyInput.value = state[item.name]; // 同步 state 到輸入框
-
-          if (plusBtn) {
-            // 沒滿額，或者已經選了一件，就鎖死 "+" 鈕
-            if (!isEligible || currentGiftCount >= 1) {
-              plusBtn.disabled = true;
-              plusBtn.style.opacity = "0.5";
-            } else {
-              plusBtn.disabled = false;
-              plusBtn.style.opacity = "1";
-            }
-          }
-        }
-      });
-
-      // 4. 如果因為反悔而導致歸零，更新下方的總結文字
-      if (needRecompute) {
-        let newTotal = 0, newCount = 0;
-        products.forEach(item => {
-          const qty = state[item.name] || 0;
-          newTotal += qty * item.price;
-          if (item.name !== '環保提袋') newCount += qty;
-        });
-        summaryEl.textContent = `總金額：$${newTotal}｜總顆數：${newCount}`;
+  function checkActivityRules(total, count) {
+    const giftItems = ["吉祥紅色", "如意紺藍"];
+    
+    // 1. 計算雞蛋糕總額 (排除加購品與提袋)
+    let cakeTotal = 0;
+    products.forEach(item => {
+      if (!giftItems.includes(item.name) && item.name !== '環保提袋') {
+        cakeTotal += (state[item.name] || 0) * item.price;
       }
-    }
+    });
+
+    const isEligible = cakeTotal >= 168;
+    let currentGiftTotal = 0;
+    giftItems.forEach(name => currentGiftTotal += (state[name] || 0));
+
+    // 2. 遍歷商品，針對加購品做鎖定
+    products.forEach((item, idx) => {
+      if (giftItems.includes(item.name)) {
+        const plusBtn = document.querySelector(`.counter[data-index="${idx}"] .plus-btn`);
+        const qtyInput = document.getElementById(`qty-${idx}`);
+
+        if (plusBtn) {
+          // 判定：金額不足 168 或 已點選 1 件加購品，就鎖死按鈕
+          const shouldDisable = !isEligible || currentGiftTotal >= 1;
+          plusBtn.disabled = shouldDisable;
+          plusBtn.style.opacity = shouldDisable ? "0.3" : "1";
+          plusBtn.style.pointerEvents = shouldDisable ? "none" : "auto"; // 徹底防誤點
+        }
+
+        // 3. 反悔連動：如果客人減少雞蛋糕導致金額不足 168，自動移除已選的紅包袋
+        if (!isEligible && state[item.name] > 0) {
+          state[item.name] = 0;
+          if (qtyInput) qtyInput.value = 0;
+          // 觸發非同步更新，把 79 元從總金額扣除
+          setTimeout(() => updateSummary(), 0);
+        }
+      }
+    });
+  }
    //春節活動底部，記得活動結束刪除
     
     function changeQty(idx, diff) {
+      // --- 這是新增的攔截保護，避免灰色按鈕還能點 ---
+      const btnClass = diff > 0 ? '.plus-btn' : '.minus-btn';
+      const btn = document.querySelector(`.counter[data-index="${idx}"] ${btnClass}`);
+      if (btn && btn.disabled) return; 
+      // -------------------------------------------
+
       const item = products[idx];
       const newQty = Math.max(0, (state[item.name] || 0) + diff);
       state[item.name] = newQty;
@@ -801,7 +790,7 @@
         if (isNaN(value) || value < 0) value = 0;
 
         //春節活動加購輸入框，活動結束刪除
-        const giftItems = ["手作雙層布紅包袋 - 吉祥紅色", "手作雙層布紅包袋 - 如意紺藍"];
+        const giftItems = ["吉祥紅色", "如意紺藍"];
         if (giftItems.includes(item.name)) {
           if (value > 1) value = 1; // 強制不准超過 1
           
