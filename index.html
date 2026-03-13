@@ -385,9 +385,10 @@
   <div class="section-title">🌱 我們的堅持</div>
   <div class="card card-accent">
     <ul style="padding-left: 1.2rem; list-style: none;">
-      <li>💛 花田舎，就像給家人吃的一樣 <strong>安心</strong></li>
-      <li>✅ 每日現打<strong>純天然麵糊</strong>，無人工添加</li>
-      <li>🥚 所有口味皆為 <strong>「蛋奶素」</strong></li>
+      <li>💛 花田舎，給家人的安心滋味</strong></li>
+      <li>✅ 每日現打純天然麵糊，無人工添加</li>
+      <li>🚫 今日麵糊今日畢，絕不過夜留存</li>
+      <li>🥚 口味皆為「蛋奶素」可食</li>
     </ul>
   </div>
 
@@ -408,7 +409,8 @@
   <div class="section-title">📅 店休日</div>
   <ul class="card card-info" style="list-style:none; padding-left:1.5rem;">
     
-    <li>3/11(三) 店休</li>
+    <li>3/14(六) 店休</li>
+    <li>3/15(日) 店休</li>
   
     
   </ul>
@@ -423,11 +425,12 @@
     
       <p style="font-size:1.05rem; line-height:1.6; color:#5c4033; margin-bottom:0.8rem;">
 
-        <strong>泡菜蛋燒 $40</strong><br>
-
-        <strong>泡菜起司 $38</strong><br><br>
         
-        
+        <strong>限時閃購 ✨ 卡士達買 5 送 1！</strong><br>
+          補足週五能量！只要在下午 5 點前預購<br>
+          5 顆卡士達直接再送你 1 顆 ✨<br>
+          剛出爐的甜蜜滋味，是週五下班前最療癒的期待。<br><br>
+        <span style="font-style: italic; color: #703f1c;">💡 預購到 17:00 截止，取餐最晚至 17:30，快手刀下單！</span><br><br>
 
           <!-- <strong>濃情巧克力 $38</strong><br>
           花田舎新鮮特調，濃郁的苦甜巧克力甘納許，一口咬下超滿足～✨<br> <br>  -->
@@ -547,8 +550,8 @@
       //{ name: "濃情巧克力", price: 38, category: "限定口味" },
 
       //{ name: "鮮草莓巧克力", price: 46, category: "限定口味" },
-      { name: "泡菜蛋燒", price: 40, category: "限定口味" },
-      { name: "泡菜起司", price: 38, category: "限定口味" },
+      //{ name: "泡菜蛋燒", price: 40, category: "限定口味" },
+      //{ name: "泡菜起司", price: 38, category: "限定口味" },
       //{ name: "薯餅起司", price: 43, category: "限定口味" },
       //{ name: "雪塩香檸奶酥", price: 40, category: "限定口味" },
       //{ name: "紫糯米芋泥湯圓", price: 33, category: "限定口味" },
@@ -617,7 +620,7 @@
      // ['2026-02-15', '2026-02-18'],
 
       // ✅ 「單一天店休」：
-       '2026-03-11',
+       '2026-03-11','2026-03-14','2026-03-15',
     ];
 
     const holidays = new Set(
@@ -797,7 +800,7 @@
       const day = d.getDay();
       const isToday = val === new Date().toISOString().split('T')[0];
 
-      const earlyOpenDays = new Set(['2026-02-19','2026-02-20']); // ⬅️ 想提早營業哪天就在這加
+      const earlyOpenDays = new Set(['2026-02-19','2026-03-13']); // ⬅️ 想提早營業哪天就在這加
       const isEarlyOpenDay = earlyOpenDays.has(val);
       const isWeekend = (day === 0 || day === 6);
       const useWeekendTime = isWeekend || isEarlyOpenDay;
